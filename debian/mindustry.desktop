@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Mindustry
+Comment=Hybrid tower-defense sandbox factory game
+Exec=mindustry
+Icon=mindustry
+Categories=Game;StrategyGame;
+Terminal=false

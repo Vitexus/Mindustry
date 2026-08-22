@@ -1,0 +1,40 @@
+Source: mindustry
+Section: games
+Priority: optional
+Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
+Build-Depends:
+ debhelper-compat (= 13),
+ openjdk-17-jdk,
+ appstream,
+Standards-Version: 4.7.0
+Homepage: https://github.com/Anuken/Mindustry
+Rules-Requires-Root: no
+Vcs-Git: https://github.com/Vitexus/Mindustry.git
+Vcs-Browser: https://github.com/Vitexus/Mindustry
+
+Package: mindustry
+Architecture: all
+Depends:
+ ${misc:Depends},
+ default-jre (>= 2:1.17) | openjdk-17-jre,
+Description: sandbox tower defense game
+ Mindustry is a hybrid tower-defense sandbox factory game. Players
+ defend outposts by mining resources, building automated supply
+ chains, and constructing defensive structures, while also being
+ able to fight against other players in multiplayer PvP mode.
+ .
+ This package contains the desktop (GUI) client.
+
+Package: mindustry-server
+Architecture: all
+Depends:
+ ${misc:Depends},
+ default-jre-headless (>= 2:1.17) | openjdk-17-jre-headless,
+Description: headless dedicated server for Mindustry
+ Mindustry is a hybrid tower-defense sandbox factory game. Players
+ defend outposts by mining resources, building automated supply
+ chains, and constructing defensive structures, while also being
+ able to fight against other players in multiplayer PvP mode.
+ .
+ This package contains the headless dedicated server, for hosting
+ multiplayer games without a graphical client.

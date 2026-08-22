@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>cz.vitexsoftware.mindustry</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Mindustry</name>
+  <summary>Hybrid tower-defense sandbox factory game</summary>
+  <description>
+    <p>
+      Mindustry is a hybrid tower-defense sandbox factory game. Players
+      defend outposts by mining resources, building automated supply
+      chains, and constructing defensive structures.
+    </p>
+    <p>
+      Beyond single-player campaigns, Mindustry supports multiplayer
+      modes where players can cooperate to build shared factories or
+      fight against each other in PvP combat.
+    </p>
+  </description>
+  <launchable type="desktop-id">mindustry.desktop</launchable>
+  <developer id="cz.vitexsoftware">
+    <name>Anuken and contributors</name>
+  </developer>
+  <categories>
+    <category>Game</category>
+    <category>StrategyGame</category>
+  </categories>
+  <url type="homepage">https://github.com/Anuken/Mindustry</url>
+  <provides>
+    <binary>mindustry</binary>
+  </provides>
+</component>

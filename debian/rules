@@ -1,0 +1,43 @@
+#!/usr/bin/make -f
+
+BUILDVERSION := $(shell dpkg-parsechangelog -S Version | cut -d- -f1)
+export JAVA_HOME := $(shell readlink -f /usr/lib/jvm/java-17-openjdk-*/ 2>/dev/null | head -1)
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	./gradlew --no-daemon -Pbuildversion=$(BUILDVERSION) desktop:dist server:dist
+
+override_dh_auto_test:
+	# no meaningful test target for a packaged build (requires a display / running game state)
+
+override_dh_auto_clean:
+	-./gradlew --no-daemon clean
+	rm -rf desktop/build server/build core/build tools/build annotations/build
+
+override_dh_auto_install:
+	install -Dm644 desktop/build/libs/Mindustry.jar \
+	    debian/mindustry/usr/share/games/mindustry/Mindustry.jar
+	install -Dm755 debian/bin/mindustry \
+	    debian/mindustry/usr/games/mindustry
+	install -Dm644 debian/mindustry.desktop \
+	    debian/mindustry/usr/share/applications/mindustry.desktop
+	install -Dm644 debian/mindustry.metainfo.xml \
+	    debian/mindustry/usr/share/metainfo/cz.vitexsoftware.mindustry.metainfo.xml
+	install -Dm644 core/assets/icons/icon_64.png \
+	    debian/mindustry/usr/share/icons/hicolor/64x64/apps/mindustry.png
+	install -Dm644 ios/data/Assets.xcassets/AppIcon.appiconset/icon-128.png \
+	    debian/mindustry/usr/share/icons/hicolor/128x128/apps/mindustry.png
+	install -Dm644 ios/data/Assets.xcassets/AppIcon.appiconset/icon-256.png \
+	    debian/mindustry/usr/share/icons/hicolor/256x256/apps/mindustry.png
+	install -Dm644 ios/data/Assets.xcassets/AppIcon.appiconset/icon-512.png \
+	    debian/mindustry/usr/share/icons/hicolor/512x512/apps/mindustry.png
+	install -Dm644 server/build/libs/server-release.jar \
+	    debian/mindustry-server/usr/share/games/mindustry-server/mindustry-server.jar
+	install -Dm755 debian/bin/mindustry-server \
+	    debian/mindustry-server/usr/games/mindustry-server
+
+override_dh_installappstream:
+	dh_installappstream
+	appstreamcli validate --pedantic --no-net debian/mindustry.metainfo.xml
